@@ -3,6 +3,7 @@ class Ticket:
     def __init__(self, source, destination):
         self.source = source
         self.destination = destination
+        self.next = None
 
 
 def reconstruct_trip(tickets, length):
@@ -22,20 +23,27 @@ def reconstruct_trip(tickets, length):
     for x in tickets:
         if x not in cache:
             cache[x.source] = x.destination
-        else:
-            continue
 
-    # src = list(cache.keys())
-    count = 0
-    for x in tickets:
-        if x.source == 'NONE':
-            route.append(x)
-        
-        if x.destination in cache:
-            route.append(x)
+    print(cache)
 
-        count += 1
+    route.append(cache['NONE'])
 
+    for i in range(length - 1):
+        route.append(cache[route[i]])
+
+
+    # for x in tickets:
+    #     if x not in cache:
+    #         cache[x.source] = x.destination
+
+    # # print(cache)
+
+    # for i in range(length):
+    #     if tickets[i] == 
+
+    # print(ans)
+    # print(list(cache.values()))
+    
     return route
 
 ticket_1 = Ticket("PIT", "ORD")
